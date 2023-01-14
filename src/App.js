@@ -1,22 +1,25 @@
 import './App.css';
 
-const Person = (props) => {
-  return (
-    <>
-    <h1>Name: {props.name}</h1>
-    <h2>Last Name: {props.lastname}</h2>
-    <h2>Age: {props.age}</h2>
-    </>
-  )
-}
+import { useState, useEffect } from 'react';
 
 const App = () => {
+  const [counter, setCounter] = useState(0);
+
+  // useEffect(() => { // at the page load
+  //   setCounter(100);
+  // }, []) // load only one
+
+  useEffect(() => { // at the page load
+    console.log('change counter to ' + counter);
+  }, [counter]) // load when {counter} value change
+
   return (
     <div className="App">
-      <Person name='Jan' lastname={'Sornda'} age={40}/>
-      <Person name="Jam" lastname={"Sornda"} age={30}/>
+      <button onClick={() => setCounter((prevCount) => prevCount - 1)}>-</button>
+      <h1>{counter}</h1>
+      <button onClick={() => setCounter((prevCount) => prevCount + 1)}>+</button>
     </div>
-  );
+  )
 }
 
 export default App;
